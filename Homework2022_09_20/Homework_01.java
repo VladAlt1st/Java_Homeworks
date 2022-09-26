@@ -11,7 +11,7 @@ public class Homework_01 {
 
     public static boolean checkNumberEquality(int a, int b, int c) {
        return a == b + c || b == a + c || c == a + b;
-    } // вариант с простой проверкой
+    } // variant s prostoi proverkoi
 
     public static  void printNumberEquality(int a, int b, int c) {
         if (a == b + c) {
@@ -22,6 +22,6 @@ public class Homework_01 {
             System.out.printf("%d is the sum of %d and %d", c, a, b);
         } else {
             System.out.println("there is no number equal to the sum of the other two");
-        } // вариант с проверкой и выводом
+        } // variant s proverkoi i vuvodom
     }
 }
