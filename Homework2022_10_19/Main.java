@@ -12,11 +12,11 @@ groceries, electronics (mobile phones and laptops), clothing.
 
 public class Main {
     public static void main(String[] args) {
-        Check check = new Check();
-        check.addProduct(new MobilePhone("Iphone10S", 1250));
-        check.addProduct(new Laptop("Asus", 2200.30));
-        check.addProduct(new Food("Pizza", 26.30, 4.40));
-        check.addProduct(new Clothes("Pullover", 50.50));
-        check.printCheck();
+        Basket basket = new Basket(10);
+        basket.add(new MobilePhone("Iphone10S", 1250));
+        basket.add(new Laptop("Asus", 2200.30));
+        basket.add(new Food("Pizza", 26.30, 4.40));
+        basket.add(new Clothes("Pullover", 50.50));
+        System.out.println(basket.checkout());
     }
 }
