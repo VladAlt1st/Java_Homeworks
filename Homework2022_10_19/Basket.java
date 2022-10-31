@@ -28,7 +28,7 @@ public class Basket {
     }
 
     public String checkout() {
-        StringBuilder res = new StringBuilder();
+        StringBuilder res = new StringBuilder("Check:" + System.lineSeparator());
         for (int i = 0; i < products.length && i < size; i++) {
             res.append(products[i].toString()).append(System.lineSeparator());
         }
@@ -39,7 +39,7 @@ public class Basket {
     private String getTotal() {
         double total = 0;
         for (int i = 0; i < products.length && i < size; i++) {
-            total += products[i].getPrice();
+            total += products[i].getFullPrice();
         }
         return String.format("Total = %.2f", total);
     }

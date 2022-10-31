@@ -8,8 +8,8 @@ public class Food extends Product {
         this.priceForUrgency = priceForUrgency;
     }
 
-    public double getPrice() {
-        return  super.getPrice() + priceForUrgency;
+    public double getFullPrice() {
+        return  super.getFullPrice() + priceForUrgency;
     }
 
     @Override

@@ -17,6 +17,10 @@ public class Product {
         return price;
     }
 
+    public double getFullPrice() {
+        return price;
+    }
+
     @Override
     public String toString() {
         return String.format("%s, price - %.2f",name,price);
