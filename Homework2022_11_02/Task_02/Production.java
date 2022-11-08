@@ -4,34 +4,29 @@ import java.util.Scanner;
 
 public class Production {
 
-    public static int[] getArray(){
-        printInfo();
-        Arrayable arrayable = setArrayType();
-        return arrayable.makeArray();
-    }
-
-    private static void printInfo() {
+    public int[] getArray() {
         System.out.println("Enter array type:\n" +
-                "1. Integer array;\n" +
-                "2. Double array;\n" +
-                "3. String array.");
-    }
-
-    private static Arrayable setArrayType() {
-        return switch (setWay()) {
-            case 1 -> new UnitsArray();
-            case 2 -> new TensArray();
-            case 3 -> new HundredsArray();
-            default -> null;
+                "1. Static array;\n" +
+                "2. Random array;\n" +
+                "3. User array.");
+        return switch (setChose()) {
+            case 1 -> getArray(new StaticArrayProducer());
+            case 2 -> getArray(new RndArrayProducer());
+            case 3 -> getArray(new UserArrayProducer());
+            default -> new int[0];
         };
     }
 
-    private static int setWay() {
+    public int[] getArray(ArrayProducer arrayProducer){
+       return arrayProducer.makeArray();
+    }
+
+    private int setChose() {
         Scanner sc = new Scanner(System.in);
-        int way = sc.nextInt();
-        while (way < 1 || way > 3) {
-            way = sc.nextInt();
+        int chose = sc.nextInt();
+        while (chose < 1 || chose > 3) {
+            chose = sc.nextInt();
         }
-        return way;
+        return chose;
     }
 }

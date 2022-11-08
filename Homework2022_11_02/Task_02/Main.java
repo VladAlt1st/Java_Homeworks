@@ -4,7 +4,8 @@ import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
-        int[] intArr = Production.getArray();
-        System.out.println(Arrays.toString(intArr));
+        Production production = new Production();
+        int[] arr = production.getArray();
+        System.out.println(Arrays.toString(arr));
     }
 }
