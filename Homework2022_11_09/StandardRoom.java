@@ -2,8 +2,8 @@ package Homework2022_11_09;
 
 public class StandardRoom extends HotelRoom{
 
-    public StandardRoom(int numberOfRoom, double price, FitnessCenter fitnessCenter) {
-        super(numberOfRoom, price, fitnessCenter);
+    public StandardRoom(int number, double price) {
+        super(number, price);
     }
 
     @Override

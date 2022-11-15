@@ -13,15 +13,16 @@ public class FitnessCenter {
         return price;
     }
 
-    public void setPrice(double price) {
-        this.price = price;
-    }
-
     public boolean isAvailable() {
         return isAvailable;
     }
 
-    public void setAvailable(boolean available) {
-        isAvailable = available;
+    @Override
+    public String toString() {
+        String status = isAvailable()? "available" : "not available";
+        if(isAvailable) {
+            return String.format("Fitness center: %s; price - %.2f", status, price);
+        }
+        return String.format("Fitness center: %s", status);
     }
 }
