@@ -1,12 +1,14 @@
-package Homework2022_11_09;
+package Homework2022_11_09.Rooms;
 
 public abstract class HotelRoom {
     private int number;
     private double price;
+    private String type;
 
-    public HotelRoom(int number, double price) {
+    public HotelRoom(int number, double price, String type) {
         this.number = number;
         this.price = price;
+        this.type = type;
     }
 
     public int getNumber() {
@@ -17,9 +19,13 @@ public abstract class HotelRoom {
         return price;
     }
 
+    public String getType() {
+        return type;
+    }
+
     @Override
     public String toString() {
-        return String.format("room %d: price - %.2f", number, price);
+        return String.format("%s room %d: price - %.2f",type, number, price);
     }
 
 

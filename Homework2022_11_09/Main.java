@@ -1,6 +1,8 @@
 package Homework2022_11_09;
 
 
+import java.util.ArrayList;
+
 /*It is necessary to write an application for recording data on booking rooms in hotels.
   Your program should have several types of rooms, for example: standard, superior, deluxe, president.
   Naturally, the room is the price of living. In addition, the suites, the president has access to the fitness center,
@@ -15,15 +17,9 @@ package Homework2022_11_09;
   -determining the intersection of intervals*/
 public class Main {
     public static void main(String[] args) {
-        BookingsList bookingsList = new BookingsList();
-        System.out.println(HotelRooms.getRoomsInfo());
-        bookingsList.addBooking(1,new DateTime(1,1,1,1,1),new DateTime(2,2,2,2,2),new FitnessCenter(true));
-        bookingsList.addBooking(5,new DateTime(1,1,1,1,1),new DateTime(2,2,2,2,2),new FitnessCenter(false));
-        bookingsList.addBooking(10,new DateTime(1,1,1,1,1),new DateTime(2,2,2,2,2),new FitnessCenter(true));
-        System.out.println(bookingsList.getBookingsInfo());
-        bookingsList.removeBooking(3);
-        System.out.println(bookingsList.getBookingsInfo());
-
+        BookingService bookingService = new BookingService();
+        bookingService.bookingServiceReception();
+        System.out.println(bookingService.getBookingsList().getBookingsInfo());
     }
 }
 
