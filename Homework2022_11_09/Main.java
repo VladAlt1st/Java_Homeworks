@@ -1,8 +1,6 @@
 package Homework2022_11_09;
 
 
-import java.util.ArrayList;
-
 /*It is necessary to write an application for recording data on booking rooms in hotels.
   Your program should have several types of rooms, for example: standard, superior, deluxe, president.
   Naturally, the room is the price of living. In addition, the suites, the president has access to the fitness center,

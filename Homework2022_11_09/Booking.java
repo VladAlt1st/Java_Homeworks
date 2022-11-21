@@ -49,7 +49,7 @@ public class Booking implements Comparable<Booking> {
 
     @Override
     public String toString() {
-        return String.format("Booking %d:\n %s;\n %s;\n From %s to %s;\n Total - %.2f.",
+        return String.format("Booking %d:%n %s;%n %s;%n From %s to %s;%n Total - %.2f.",
                 getBookingNumber(), room.toString(),fitnessCenter.toString(),from.toString(),to.toString(),getTotal());
     }
 

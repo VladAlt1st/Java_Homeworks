@@ -4,6 +4,7 @@ import Homework2022_11_09.Camparators.*;
 import Homework2022_11_09.Rooms.HotelRoom;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class BookingsList {
@@ -11,6 +12,12 @@ public class BookingsList {
     private List<Booking> bookingsList = new ArrayList<>();
     private HotelRoom[] roomsList = HotelRooms.getList();
     private int bookingNumber = 1;
+
+    public BookingsList(List<Booking> bookingsList) {
+        this.bookingsList = bookingsList;
+    }
+
+    public BookingsList() {}
 
     public void addBooking(int roomNumber, DateTime from, DateTime to, FitnessCenter fitnessCenter) {
         bookingsList.add(new Booking(roomsList[roomNumber], from, to, fitnessCenter, bookingNumber));
@@ -26,24 +33,14 @@ public class BookingsList {
         }
     }
 
-    public void sortByDateStart() {
-        bookingsList.sort(new CompareBookingByDateStart());
+    public void sortList(Comparator<Booking> comparator) {
+        bookingsList.sort(comparator);
     }
 
-    public void sortByDateEnd() {
-        bookingsList.sort(new CompareBookingByDateEnd());
-    }
-
-    public void sortByBookingNumber() {
-        bookingsList.sort(new CompareByBookingNumber());
-    }
-
-    public void sortByBookingPrice() {
-        bookingsList.sort(new CompareByBookingPrice());
-    }
-
-    public void sortByRoomType() {
-        bookingsList.sort(new CompareBookingByRoomType());
+    public List<Booking> getSortedList(Comparator<Booking> comparator) {
+        List<Booking> newBookingList = new ArrayList<>(bookingsList);
+        newBookingList.sort(comparator);
+        return newBookingList;
     }
 
     public String getBookingsInfo() {

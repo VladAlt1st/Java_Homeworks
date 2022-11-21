@@ -1,5 +1,9 @@
 package Homework2022_11_09;
 
+import Homework2022_11_09.Camparators.BookingComparatorByScanner;
+import Homework2022_11_09.Camparators.BookingComparatorFactory;
+
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class BookingService {
@@ -15,6 +19,7 @@ public class BookingService {
         if(sc.nextInt() == 1) {
             System.out.println("How many bookings?");
             int howMany = sc.nextInt();
+            System.out.println(HotelRooms.getRoomsInfo());
             for (int i = 0; i < howMany; i++) {
                 makeBooking();
             }
@@ -22,10 +27,13 @@ public class BookingService {
 
         System.out.println("Would you like to sort bookings? Yes - 1, no - other number.");
         if(sc.nextInt() == 1) {
-            System.out.println("How to sort bookings?\n 1.By booking number;\n 2.By price;\n 3.By room type;\n 4.By start;\n 5.By end;");
-            int way = sc.nextInt();
-            sortBy(way);
-            System.out.println(bookingsList.getBookingsInfo());
+            BookingComparatorFactory bookingComparatorFactory = new BookingComparatorByScanner();
+            Comparator<Booking> comparator = bookingComparatorFactory.getComparator();
+            while (comparator != null) {
+                BookingsList newBookingsList = new BookingsList(bookingsList.getSortedList(comparator));
+                System.out.println(newBookingsList.getBookingsInfo());
+                comparator = bookingComparatorFactory.getComparator();
+            }
         }
 
         System.out.println("Want to delete the booking? Yes - 1, no - other number.");
@@ -44,7 +52,6 @@ public class BookingService {
 
     private void makeBooking() {
         Scanner sc = new Scanner(System.in);
-        HotelRooms.getRoomsInfo();
         System.out.println("Enter room number:");
         int roomNumber = sc.nextInt();
         System.out.println("Enter from: day, month, year;");
@@ -61,15 +68,5 @@ public class BookingService {
             pass = true;
         }
         bookingsList.addBooking(roomNumber, new DateTime(dayFrom, monthFrom, yearFrom), new DateTime(dayTo, monthTo, yearTo),new FitnessCenter(pass));
-    }
-
-    private void sortBy(int way) {
-        switch (way) {
-            case 1 -> bookingsList.sortByBookingNumber();
-            case 2 -> bookingsList.sortByBookingPrice();
-            case 3 -> bookingsList.sortByRoomType();
-            case 4 -> bookingsList.sortByDateStart();
-            case 5 -> bookingsList.sortByDateEnd();
-        }
     }
 }
