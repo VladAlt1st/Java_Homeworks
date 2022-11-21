@@ -7,6 +7,7 @@ import java.util.Comparator;
 public class CompareByBookingPrice implements Comparator<Booking> {
     @Override
     public int compare(Booking o1, Booking o2) {
-        return (int)(o1.getTotal() - o2.getTotal());
+        double res = o1.getTotal() - o2.getTotal();
+        return (int)(res * 10);
     }
 }
