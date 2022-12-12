@@ -1,6 +1,7 @@
 package Homework2022_12_07;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.StringTokenizer;
 
@@ -16,29 +17,46 @@ public class Main {
     /*1. Write a Java method to count the number of words in a string
     Example: "as soon as possible" should return "as: 2, soon: 1, possible: 1"*/
     public static void getWordsWithCount(String sentence) {
-        Map<String, Integer> wordsWithCount = new HashMap<>();
+        Map<String, Integer> wordsWithCount = new LinkedHashMap<>();
 
         StringTokenizer tokenizer = new StringTokenizer(sentence, " ");
 
         while (tokenizer.hasMoreTokens()) {
             String word = tokenizer.nextToken().toLowerCase().replace(",", "").replace(".", "");
 
-            if (wordsWithCount.containsKey(word)) {
+            wordsWithCount.merge(word, 1, Integer::sum);
+
+            /*if (wordsWithCount.containsKey(word)) {
                 int amount = wordsWithCount.get(word) + 1;
                 wordsWithCount.put(word, amount);
                 continue;
             }
-            wordsWithCount.put(word, 1);
+            wordsWithCount.put(word, 1);*/
         }
-        wordsWithCount.forEach((k, v) -> System.out.print(k + ": " + v + "; "));
-        System.out.println();
+        System.out.println(wordsWithCount);
     }
 
     /*2. Write a Java method to check if two strings are anagrams of each other or not*/
     public static boolean checkStringsAnagram(String str1, String str2) {
-        Map<Character, Integer> str1Chars = new HashMap<>();
+        if (str1.length() != str2.length()) {
+            return false;
+        }
+
+        Map<Character, Integer> strChars = new HashMap<>();
 
         for (int i = 0; i < str1.length(); i++) {
+            char str1Char = str1.charAt(i);
+            char str2Char = str2.charAt(i);
+
+            strChars.merge(str1Char, 1, Integer ::sum);
+            strChars.merge(str2Char, -1, Integer ::sum);
+        }
+
+        return strChars.values().stream().allMatch(v -> v == 0);
+    }
+
+
+       /* for (int i = 0; i < str1.length(); i++) {
             char currChar = str1.charAt(i);
 
             if (str1Chars.containsKey(currChar)) {
@@ -67,5 +85,5 @@ public class Main {
         }
 
         return true;
-    }
+    }*/
 }
