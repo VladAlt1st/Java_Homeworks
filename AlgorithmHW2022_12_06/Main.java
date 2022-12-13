@@ -28,7 +28,7 @@ public class Main {
 
         System.out.println(arrayListHW.getSize());
         System.out.println("-----------");
-        
+
         arrayListHW.print();
 
 

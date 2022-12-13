@@ -20,8 +20,7 @@ public class ArrayListHW {
         if (size == capacity) {
             enlarge();
         }
-        arr[size] = value;
-        size++;
+        arr[size++] = value;
     }
 
     public void addAt(int index, int value) {
@@ -51,8 +50,7 @@ public class ArrayListHW {
     }
 
     public void remove() {
-        arr[size - 1] = 0;
-        size--;
+        arr[--size] = 0;
     }
 
     public void removeAt(int index) {
@@ -64,7 +62,6 @@ public class ArrayListHW {
             return;
         }
         System.arraycopy(arr, index + 1, arr, index, size - index - 1);
-        arr[size - 1] = 0;
         size--;
     }
 
