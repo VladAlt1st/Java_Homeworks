@@ -1,9 +1,16 @@
 package Homework2022_11_30;
 
-public class LinkedListImpl<T> {
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
+public class LinkedListImpl<T> implements Iterable<T> {
     private Node<T> head;
     private Node<T> tail;
     private int size;
+
+    public int getSize() {
+        return size;
+    }
 
     public boolean add(T elem) {
         Node<T> newNode = new Node<>(elem);
@@ -42,16 +49,13 @@ public class LinkedListImpl<T> {
             return;
         }
 
-        Node<T> old = head;
-        for (int i = 0; i < index; i++) {
-            old = old.next;
-        }
+        Node<T> res = findByIndex(index);
 
-        old.prev.next = newNode;
-        newNode.prev = old.prev;
+        res.prev.next = newNode;
+        newNode.prev = res.prev;
 
-        old.prev = newNode;
-        newNode.next = old;
+        res.prev = newNode;
+        newNode.next = res;
 
         size++;
     }
@@ -61,7 +65,7 @@ public class LinkedListImpl<T> {
             throw new IndexOutOfBoundsException();
         }
 
-        Node<T> res = head;
+        Node<T> res = findByIndex(index);
 
         if (index == 0) {
             head = head.next;
@@ -78,19 +82,6 @@ public class LinkedListImpl<T> {
             res.prev = null;
             size--;
             return res.data;
-        }
-
-        if (index <= size / 2) {
-            for (int i = 0; i < index; i++) {
-                res = res.next;
-            }
-        }
-
-        if (index > size / 2) {
-            res = tail;
-            for (int i = size - 1; i > index; i--) {
-                res = res.prev;
-            }
         }
 
         res.prev.next = res.next;
@@ -115,6 +106,12 @@ public class LinkedListImpl<T> {
             return tail.data;
         }
 
+        Node<T> res = findByIndex(index);
+
+        return res.data;
+    }
+
+    private Node<T> findByIndex(int index) {
         Node<T> res = head;
 
         if (index <= size / 2){
@@ -129,8 +126,7 @@ public class LinkedListImpl<T> {
                 res = res.prev;
             }
         }
-
-        return res.data;
+        return res;
     }
 
     public void printData() {
@@ -143,6 +139,42 @@ public class LinkedListImpl<T> {
                 currentNode = currentNode.next;
             }
             System.out.println();
+        }
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new OurIterator(this);
+    }
+
+    class OurIterator implements Iterator<T> {
+        private LinkedListImpl<T> list;
+        private int pos = 0;
+
+        public OurIterator(LinkedListImpl<T> list) {
+            this.list = list;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return pos < list.size;
+        }
+
+        @Override
+        public T next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+
+            return list.get(pos++);
+        }
+
+        @Override
+        public void remove() {
+            if (!(pos > 0 && pos <= size)) {
+                throw new NoSuchElementException();
+            }
+            list.remove(--pos);
         }
     }
 
