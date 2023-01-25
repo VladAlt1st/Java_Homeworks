@@ -1,5 +1,6 @@
 package Homework2023_01_23;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -41,7 +42,7 @@ public class Main {
         double res = list.stream()
                 .mapToDouble(Employee::getSalary)
                 .average()
-                .getAsDouble();
+                .orElseThrow();
 
 
         System.out.println((int)res);
@@ -73,7 +74,7 @@ public class Main {
 
         Employee employee = list.stream()
                 .min(Employee::compareTo)
-                .get();
+                .orElseThrow();
 
         System.out.println(employee);
     }
@@ -81,15 +82,12 @@ public class Main {
     public static void task7(List<Employee> list) {
         //Получите сотрудников из всех отделов с максимальной зп
 
-        /*List<Employee> employeeList = list.stream()
-                .filter(e -> {
-                    return e.getSalary() > 4000 && (e.getDepartment().equals("A") ||
-                            e.getDepartment().equals("B") ||
-                            e.getDepartment().equals("C"));
-                }).collect(Collectors.toList());*/
-
-        Map<String, Optional<Employee>> employeeList = list.stream()
-                .collect(Collectors.groupingBy(Employee::getDepartment, Collectors.maxBy(Employee::compareTo)));
+        List<Employee> employeeList = list.stream()
+                .collect(Collectors.groupingBy(Employee::getDepartment, Collectors.maxBy(Employee::compareTo)))
+                .values()
+                .stream()
+                .map(Optional::orElseThrow)
+                .collect(Collectors.toList());
 
         System.out.println(employeeList);
     }
