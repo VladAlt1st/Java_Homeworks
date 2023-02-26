@@ -1,10 +1,48 @@
 package Homework2023_02_20.Task1And2;
 
 import java.util.Arrays;
+import java.util.LinkedHashSet;
+import java.util.Objects;
+import java.util.Set;
 
 public class UnitHW1And2 {
 
-    //Напишите программу на Java и тест для нее
+    public static int[] compareArr(int[] arrA, int[] arrB) {
+        Arrays.sort(arrB);
+        return Arrays.stream(arrA).distinct()
+                .filter(x -> Arrays.binarySearch(arrB, x) > 0)
+                .toArray();
+    }
+
+    public static int[] findCommonElem(int[] arr1, int[] arr2) {
+        Objects.requireNonNull(arr1);
+        Objects.requireNonNull(arr2);
+
+        if (arr1.length == 0 || arr2.length == 0) {
+            return new int[0];
+        }
+
+        if (arr1 == arr2) {
+            return arr1;
+        }
+
+        Set<Integer> set = new LinkedHashSet<>();
+        for (int value : arr1) {
+            set.add(value);
+        }
+
+        Set<Integer> result = new LinkedHashSet<>();
+        for (int value : arr2) {
+            if (set.contains(value)) {
+                result.add(value);
+            }
+        }
+
+        return result.stream().mapToInt(Integer::intValue).toArray();
+    }
+
+
+        //Напишите программу на Java и тест для нее
     //для поиска общих элементов между двумя массивами целых чисел
     public int[] findDuplicates(int[] firstArr, int[] secondArr) {
         try {
